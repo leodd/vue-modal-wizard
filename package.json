@@ -1,0 +1,56 @@
+{
+  "name": "vue-modal-wizard",
+  "version": "1.0.3",
+  "description": "An agressive and powerful modal component for Vue.",
+  "main": "./dist/vue-modal-wizard.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup -c build/rollup.config.js && uglifyjs dist/vue-modal-wizard.js -c -m > dist/vue-modal-wizard.min.js"
+  },
+  "keywords": [
+    "vue",
+    "modal",
+    "vue-modal",
+    "modal-wizard",
+    "vue-modal-wizard"
+  ],
+  "files": [
+    "dist/vue-modal-wizard.js",
+    "dist/vue-modal-wizard.min.js",
+    "src"
+  ],
+  "author": "Yuqiao Chen",
+  "repository": "https://github.com/leodd/vue-modal-wizard.git",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.1.5",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "node-sass": "^4.9.0",
+    "rollup": "^0.59.1",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-vue": "^4.1.4",
+    "sass-loader": "^7.0.1",
+    "scss-loader": "0.0.1",
+    "style-loader": "^0.21.0",
+    "vue": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-loader": "^15.0.11",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
