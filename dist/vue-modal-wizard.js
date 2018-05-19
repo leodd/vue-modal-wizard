@@ -142,6 +142,8 @@
       },
 
       setPosition(position) {
+        this.position = position;
+
         this.$nextTick(() => {
           let anchorbox = this.$refs.anchorbox;
           let modal = this.toArray(anchorbox.children).pop();
@@ -225,6 +227,10 @@
         });
       },
 
+      reset() {
+        this.setPosition(this.position);
+      },
+
       close() {
         if (this.alreadyClose) {
           return;
@@ -284,7 +290,7 @@
           if (_vm.closeReady) {
             _vm.close();
           }
-        } } }, [_c('div', { ref: "anchorbox", staticClass: "anchor-box" }, [_c('transition', { attrs: { "name": _vm.transition } }, [_c(_vm.contentComOpt, _vm._b({ directives: [{ name: "show", rawName: "v-show", value: _vm.visible, expression: "visible" }], ref: "modalCom", tag: "component", on: { "changeColor": _vm.onColorChange, "changePosition": _vm.setPosition } }, 'component', _vm.props, false))], 1)], 1)])]);
+        } } }, [_c('div', { ref: "anchorbox", staticClass: "anchor-box" }, [_c('transition', { attrs: { "name": _vm.transition } }, [_c(_vm.contentComOpt, _vm._b({ directives: [{ name: "show", rawName: "v-show", value: _vm.visible, expression: "visible" }], ref: "modalCom", tag: "component", on: { "reset": _vm.reset, "changeColor": _vm.onColorChange, "changePosition": _vm.setPosition } }, 'component', _vm.props, false))], 1)], 1)])]);
   };
   var __vue_staticRenderFns__ = [];
 
@@ -292,7 +298,7 @@
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return;
-    inject("data-v-4e16d102_0", { source: "\n.ModalWizard__Modal{position:fixed\n}\n.ModalWizard__Modal>.background{position:fixed;top:0;left:0;height:100%;width:100%;overflow:auto\n}\n.ModalWizard__Modal>.background>.anchor-box{position:absolute;top:0;left:50%;width:0\n}", map: undefined, media: undefined });
+    inject("data-v-58178d27_0", { source: "\n.ModalWizard__Modal{position:fixed\n}\n.ModalWizard__Modal>.background{position:fixed;top:0;left:0;height:100%;width:100%;overflow:auto\n}\n.ModalWizard__Modal>.background>.anchor-box{position:absolute;top:0;left:50%;width:0\n}", map: undefined, media: undefined });
   };
   /* scoped */
   const __vue_scope_id__ = undefined;

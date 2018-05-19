@@ -12,6 +12,7 @@
                      v-bind="props"
                      ref="modalCom"
                      v-show="visible"
+                     @reset="reset"
                      @changeColor="onColorChange"
                      @changePosition="setPosition"/>
         </transition>
@@ -134,6 +135,8 @@
       },
 
       setPosition(position) {
+        this.position = position;
+
         this.$nextTick(() => {
           let anchorbox = this.$refs.anchorbox;
           let modal = this.toArray(anchorbox.children).pop();
@@ -221,6 +224,10 @@
             modal.style.bottom = position.bottom || '0';
           }
         });
+      },
+
+      reset() {
+        this.setPosition(this.position);
       },
 
       close() {
