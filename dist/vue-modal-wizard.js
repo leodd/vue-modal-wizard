@@ -537,14 +537,16 @@
       ModalWizard.setInitZIndex(zIndex);
     }
 
-    Vue$$1.prototype[`$${opts.openModalName || 'openModal'}`] = ModalWizard.openModal;
-    Vue$$1.prototype[`$${opts.closeModalName || 'closeModal'}`] = ModalWizard.closeModal;
+    Vue$$1.prototype[`$${opts.name || 'modal'}`] = {
+      open: ModalWizard.openModal,
+      close: ModalWizard.closeModal
+    };
   }
 
   var index = {
     install,
-    openModal: ModalWizard.openModal,
-    closeModal: ModalWizard.closeModal
+    open: ModalWizard.openModal,
+    close: ModalWizard.closeModal
   };
 
   return index;
