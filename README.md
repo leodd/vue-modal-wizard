@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/dm/vue-modal-wizard.svg)](https://www.npmjs.com/package/vue-modal-wizard)
 
 > Simple and intuitive, highly customizable modal component for Vue.js.
+> Demo: https://leodd.github.io/vue-modal-wizard/
 
 ![adaptive modal](https://user-images.githubusercontent.com/18587560/40267398-4de6006a-5b21-11e8-92fd-e06be781e07c.gif)
 ![infinite modal](https://user-images.githubusercontent.com/18587560/40267391-27a39caa-5b21-11e8-9e43-d073c8b62c00.gif)
