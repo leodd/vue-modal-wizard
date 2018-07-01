@@ -41,12 +41,10 @@ Define in inline template:
 
 ```javascript
 this.$modal.open(`
-  <template>
-    <div>
-      {{ message }}
-      <button :click="onOk" }>ok</button>
-    </div>
-  </template>
+  <div>
+    {{ message }}
+    <button :click="onOk" }>ok</button>
+  </div>
 `, {
   props: {
       message: 'here is a message',
@@ -114,9 +112,9 @@ Include a position option when creating modal:
 
 ```javascript
 this.$modal.open(`
-  <template>
+  <div>
     ...
-  </template>
+  </div>
 `, {
   position: {
     type: 'point',
@@ -182,9 +180,9 @@ This will close the modal on the top.
 You can disable esc detection by
 ```javascript
 this.$modal.open(`
-  <template>
+  <div>
     ...
-  </template>
+  </div>
 `, {
      ...
      escOff: true
@@ -195,9 +193,9 @@ this.$modal.open(`
 When the modal is being closed, an onClose handler will be trigger. You can define it in the option.
 ```javascript
 this.$modal.open(`
-  <template>
+  <div>
     ...
-  </template>
+  </div>
 `, {
      ...
      onClose: () => {console.log('on close')}
@@ -210,9 +208,9 @@ this.$modal.open(`
 You can set the lightbox color and transition by
 ```javascript
 this.$modal.open(`
-  <template>
+  <div>
     ...
-  </template>
+  </div>
 `, {
      ...
      style: {
@@ -275,9 +273,9 @@ By default, modal will be created dynamically, and will be destroyed after being
 
 ```javascript
 this.$modal.open(`
-  <template>
+  <div>
     ...
-  </template>
+  </div>
 `, {
      ...
      name: 'modal-one'
