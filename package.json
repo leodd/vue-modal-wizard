@@ -1,6 +1,6 @@
 {
   "name": "vue-modal-wizard",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "An agressive and powerful modal component for Vue.",
   "main": "./dist/vue-modal-wizard.js",
   "scripts": {

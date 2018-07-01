@@ -2,11 +2,11 @@ const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.js'),
+  entry: path.resolve(__dirname, '../src/index.js'),
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: "index.js",
-    publicPath: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
+    filename: "vue-modal-wizard.js",
+    publicPath: path.resolve(__dirname, '../dist'),
     library: 'VueModalWizard',
     libraryTarget: 'umd'
   },
@@ -29,7 +29,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: "babel-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          presets: ["babel-preset-env"]
+        }
       }
     ]
   },

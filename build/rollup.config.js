@@ -11,6 +11,14 @@ const babelConfig = {
   // runtimeHelpers: true,
   exclude: 'node_modules/**',
   plugins: ['external-helpers'],
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+  ]
 }
 
 const nodeResolveOptions = {

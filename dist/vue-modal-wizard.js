@@ -1,6 +1,6 @@
 /*
     vue-modal-wizard
-    Version: 1.0.3
+    Version: 1.0.4
     Licence: MIT
     (c) Yuqiao Chen
   */
@@ -14,7 +14,7 @@
   Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
 
   function parseTimeToMillisecond(s) {
-    let val = s.match(/\d*\.?\d+/g);
+    var val = s.match(/\d*\.?\d+/g);
 
     if (val) {
       val = parseFloat(val.pop());
@@ -23,22 +23,22 @@
     }
 
     if (s.indexOf('ms') === -1) {
-      return parseInt(`${val * 1000}`);
+      return parseInt('' + val * 1000);
     } else {
-      return parseInt(`${val}`);
+      return parseInt('' + val);
     }
   }
 
   var utils = {
-    parseTimeToMillisecond
+    parseTimeToMillisecond: parseTimeToMillisecond
   };
 
   //
 
-  const availableAnchorType = new Set(['point', 'column', 'sticky-column', 'viewport']);
+  var availableAnchorType = new Set(['point', 'column', 'sticky-column', 'viewport']);
 
   var script = {
-    data() {
+    data: function data() {
       return {
         visible: false,
         showModal: true,
@@ -57,21 +57,23 @@
       };
     },
 
+
     methods: {
-      recover() {
+      recover: function recover() {
         this.alreadyClose = false;
         this.showModal = true;
         this.lightboxOpacity = '0';
 
-        let modalCom = this.$refs.modalCom;
+        var modalCom = this.$refs.modalCom;
 
         if (modalCom && modalCom._modalRecover && typeof modalCom._modalRecover === 'function') {
           modalCom._modalRecover();
         }
       },
+      initStyle: function initStyle(style) {
+        var _this = this;
 
-      initStyle(style) {
-        let modalCom = this.$refs.modalCom;
+        var modalCom = this.$refs.modalCom;
 
         if (modalCom && modalCom._modalStyle && typeof modalCom._modalStyle === 'function') {
           this.setStyle(modalCom._modalStyle());
@@ -81,19 +83,20 @@
 
         this.visible = true;
 
-        let anchorbox = this.$refs.anchorbox;
+        var anchorbox = this.$refs.anchorbox;
         modalCom = this.toArray(anchorbox.children).pop();
 
-        modalCom.addEventListener("mousedown", e => {
+        modalCom.addEventListener("mousedown", function (e) {
           e.stopPropagation();
-          this.closeReady = false;
+          _this.closeReady = false;
         });
-        modalCom.addEventListener("click", e => {
+        modalCom.addEventListener("click", function (e) {
           e.stopPropagation();
         });
       },
+      setStyle: function setStyle(style) {
+        var _this2 = this;
 
-      setStyle(style) {
         if (style.fadeDuration) {
           this.fadeDuration = utils.parseTimeToMillisecond(style.fadeDuration);
         } else {
@@ -106,30 +109,31 @@
 
         this.transition = style.transition || null;
 
-        this.lightboxTransitionProp = `opacity ${this.fadeDuration}ms, background-color ${this.colorChangeDuration}`;
+        this.lightboxTransitionProp = 'opacity ' + this.fadeDuration + 'ms, background-color ' + this.colorChangeDuration;
 
-        setTimeout(() => {
-          this.lightboxOpacity = '1';
+        setTimeout(function () {
+          _this2.lightboxOpacity = '1';
         }, 1);
       },
+      initPosition: function initPosition(position) {
+        var _this3 = this;
 
-      initPosition(position) {
-        let modalCom = this.$refs.modalCom;
+        var modalCom = this.$refs.modalCom;
 
         if (modalCom && modalCom._modalFlexPosition && typeof modalCom._modalFlexPosition === 'function') {
           this.ticking = false;
 
-          let resizeHandler = () => {
-            this.setPosition(modalCom._modalFlexPosition(window.innerWidth, window.innerHeight));
-            this.ticking = false;
+          var resizeHandler = function resizeHandler() {
+            _this3.setPosition(modalCom._modalFlexPosition(window.innerWidth, window.innerHeight));
+            _this3.ticking = false;
           };
 
           resizeHandler();
 
-          this.onResize = () => {
-            if (!this.ticking) {
+          this.onResize = function () {
+            if (!_this3.ticking) {
               window.requestAnimationFrame(resizeHandler);
-              this.ticking = true;
+              _this3.ticking = true;
             }
           };
 
@@ -140,13 +144,14 @@
           this.setPosition(position || {});
         }
       },
+      setPosition: function setPosition(position) {
+        var _this4 = this;
 
-      setPosition(position) {
         this.position = position;
 
-        this.$nextTick(() => {
-          let anchorbox = this.$refs.anchorbox;
-          let modal = this.toArray(anchorbox.children).pop();
+        this.$nextTick(function () {
+          var anchorbox = _this4.$refs.anchorbox;
+          var modal = _this4.toArray(anchorbox.children).pop();
 
           if (!position.type || !availableAnchorType.has(position.type)) {
             position.type = 'point';
@@ -170,7 +175,7 @@
               modal.style.top = position.top;
               modal.style.bottom = 'auto';
             } else {
-              modal.style.top = position.bottom ? 'auto' : `-${modal.clientHeight / 2}px`;
+              modal.style.top = position.bottom ? 'auto' : '-' + modal.clientHeight / 2 + 'px';
               modal.style.bottom = position.bottom || 'auto';
             }
           }
@@ -188,7 +193,7 @@
               modal.style.left = position.left;
               modal.style.right = 'auto';
             } else {
-              modal.style.left = position.right ? 'auto' : `-${modal.clientWidth / 2}px`;
+              modal.style.left = position.right ? 'auto' : '-' + modal.clientWidth / 2 + 'px';
               modal.style.right = position.right || 'auto';
             }
           } else {
@@ -214,7 +219,7 @@
             modal.style.top = 'auto';
             modal.style.bottom = 'auto';
 
-            modal.style.margin = `${position.top || 0} 0 ${position.bottom || 0} ${position.right && !position.left ? -modal.clientWidth : 0}px`;
+            modal.style.margin = (position.top || 0) + ' 0 ' + (position.bottom || 0) + ' ' + (position.right && !position.left ? -modal.clientWidth : 0) + 'px';
           }
 
           if (position.type === 'sticky-column') {
@@ -226,12 +231,12 @@
           }
         });
       },
-
-      reset() {
+      reset: function reset() {
         this.setPosition(this.position);
       },
+      close: function close() {
+        var _this5 = this;
 
-      close() {
         if (this.alreadyClose) {
           return;
         }
@@ -247,17 +252,16 @@
           this.onClose();
         }
 
-        setTimeout(() => {
-          if (typeof this.name === 'string') {
-            this.showModal = false;
-            this.visible = false;
+        setTimeout(function () {
+          if (typeof _this5.name === 'string') {
+            _this5.showModal = false;
+            _this5.visible = false;
           } else {
-            this.doDestroy();
+            _this5.doDestroy();
           }
         }, this.fadeDuration);
       },
-
-      doDestroy() {
+      doDestroy: function doDestroy() {
         if (this.onResize) {
           window.removeEventListener('resize', this.onResize);
         }
@@ -265,28 +269,26 @@
         this.$destroy(true);
         this.$el.parentNode.removeChild(this.$el);
       },
-
-      onColorChange(color) {
+      onColorChange: function onColorChange(color) {
         this.lightboxColor = color;
       },
-
-      toArray(input) {
+      toArray: function toArray(input) {
         return Array.prototype.slice.call(input);
       }
     }
   };
 
-  const __vue_script__ = script;
+  var __vue_script__ = script;
 
   /* template */
-  var __vue_render__ = function () {
+  var __vue_render__ = function __vue_render__() {
     var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.showModal, expression: "showModal" }], staticClass: "ModalWizard__Modal" }, [_c('div', { ref: "lightbox", staticClass: "background", style: {
         backgroundColor: _vm.lightboxColor,
         transition: _vm.lightboxTransitionProp,
         opacity: _vm.lightboxOpacity
-      }, on: { "mousedown": function ($event) {
+      }, on: { "mousedown": function mousedown($event) {
           _vm.closeReady = true;
-        }, "click": function () {
+        }, "click": function click() {
           if (_vm.closeReady) {
             _vm.close();
           }
@@ -294,21 +296,21 @@
   };
   var __vue_staticRenderFns__ = [];
 
-  const __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
+  var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
   /* style */
-  const __vue_inject_styles__ = function (inject) {
+  var __vue_inject_styles__ = function (inject) {
     if (!inject) return;
     inject("data-v-58178d27_0", { source: "\n.ModalWizard__Modal{position:fixed\n}\n.ModalWizard__Modal>.background{position:fixed;top:0;left:0;height:100%;width:100%;overflow:auto\n}\n.ModalWizard__Modal>.background>.anchor-box{position:absolute;top:0;left:50%;width:0\n}", map: undefined, media: undefined });
   };
   /* scoped */
-  const __vue_scope_id__ = undefined;
+  var __vue_scope_id__ = undefined;
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  var __vue_module_identifier__ = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  var __vue_is_functional_template__ = false;
   /* component normalizer */
   function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    const component = script$$1 || {};
+    var component = script$$1 || {};
 
     if (!component.render) {
       component.render = template.render;
@@ -321,9 +323,9 @@
     component._scopeId = scope;
 
     {
-      let hook;
+      var hook = void 0;
       if (style) {
-        hook = function (context) {
+        hook = function hook(context) {
           style.call(this, createInjector(context));
         };
       }
@@ -331,14 +333,14 @@
       if (hook !== undefined) {
         if (component.functional) {
           // register for functional component in vue file
-          const originalRender = component.render;
+          var originalRender = component.render;
           component.render = function renderWithStyleInjection(h, context) {
             hook.call(context);
             return originalRender(h, context);
           };
         } else {
           // inject component registration as beforeCreate hook
-          const existing = component.beforeCreate;
+          var existing = component.beforeCreate;
           component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
         }
       }
@@ -348,19 +350,19 @@
   }
   /* style inject */
   function __vue_create_injector__() {
-    const head = document.head || document.getElementsByTagName('head')[0];
-    const styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
-    const isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
+    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
 
     return function addStyle(id, css) {
       if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
 
-      const group = isOldIE ? css.media || 'default' : id;
-      const style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+      var group = isOldIE ? css.media || 'default' : id;
+      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
 
       if (!style.ids.includes(id)) {
-        let code = css.source;
-        let index = style.ids.length;
+        var code = css.source;
+        var index = style.ids.length;
 
         style.ids.push(id);
 
@@ -377,7 +379,7 @@
         }
 
         if (!style.element) {
-          const el = style.element = document.createElement('style');
+          var el = style.element = document.createElement('style');
           el.type = 'text/css';
 
           if (css.media) el.setAttribute('media', css.media);
@@ -398,8 +400,8 @@
           style.parts.push(code);
           style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
         } else {
-          const textNode = document.createTextNode(code);
-          const nodes = style.element.childNodes;
+          var textNode = document.createTextNode(code);
+          var nodes = style.element.childNodes;
           if (nodes[index]) style.element.removeChild(nodes[index]);
           if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
         }
@@ -410,20 +412,28 @@
 
   var Modal = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
 
-  const ModalConstructor = Vue.extend(Modal);
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
 
-  const stack = [];
-  const storage = {};
-  let idSeed = 1;
-  let zIndexSeed = 1010;
+  var ModalConstructor = Vue.extend(Modal);
 
-  function openModal(content, opts = {}) {
+  var stack = [];
+  var storage = {};
+  var idSeed = 1;
+  var zIndexSeed = 1010;
+
+  function openModal(content) {
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (content === null) return;
 
-    let instance = null;
-    let comOpt = null;
+    var instance = null;
+    var comOpt = null;
 
-    let isCreateNew = true;
+    var isCreateNew = true;
 
     if (opts.name) {
       instance = storage[opts.name];
@@ -440,21 +450,23 @@
       if (typeof content === 'function') {
         comOpt = {
           functional: true,
-          render: (h, c) => content(h, c.props)
+          render: function render(h, c) {
+            return content(h, c.props);
+          }
         };
       } else if (typeof content === 'string' && content.indexOf('<') !== -1) {
         comOpt = {
           template: content
         };
 
-        if (opts['props'] && typeof opts['props'] === 'object') {
+        if (opts['props'] && _typeof(opts['props']) === 'object') {
           comOpt.props = Object.keys(opts.props);
         }
-      } else if (typeof content === 'object' || typeof content === 'string' && content.indexOf('<') === -1) {
+      } else if ((typeof content === 'undefined' ? 'undefined' : _typeof(content)) === 'object' || typeof content === 'string' && content.indexOf('<') === -1) {
         comOpt = content;
       } else return;
 
-      let data = {};
+      var data = {};
       data.contentComOpt = comOpt;
       data.closeTopModal = closeTopModal;
       data.onClose = opts.onClose;
@@ -465,7 +477,7 @@
         data: data
       });
 
-      instance.id = `modal_${idSeed++}`;
+      instance.id = 'modal_' + idSeed++;
       instance.vm = instance.$mount();
       document.body.appendChild(instance.vm.$el);
       instance.dom = instance.vm.$el;
@@ -527,24 +539,26 @@
   }
 
   var ModalWizard = {
-    openModal,
-    closeModal,
-    setInitZIndex
+    openModal: openModal,
+    closeModal: closeModal,
+    setInitZIndex: setInitZIndex
   };
 
-  function install(Vue$$1, opts = {}) {
+  function install(Vue$$1) {
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (opts.zIndex) {
       ModalWizard.setInitZIndex(zIndex);
     }
 
-    Vue$$1.prototype[`$${opts.name || 'modal'}`] = {
+    Vue$$1.prototype['$' + (opts.name || 'modal')] = {
       open: ModalWizard.openModal,
       close: ModalWizard.closeModal
     };
   }
 
   var index = {
-    install,
+    install: install,
     open: ModalWizard.openModal,
     close: ModalWizard.closeModal
   };
