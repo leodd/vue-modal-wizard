@@ -1,6 +1,6 @@
 /*
     vue-modal-wizard
-    Version: 1.0.4
+    Version: 1.0.6
     Licence: MIT
     (c) Yuqiao Chen
   */
@@ -278,6 +278,7 @@
     }
   };
 
+  /* script */
   var __vue_script__ = script;
 
   /* template */
@@ -296,7 +297,6 @@
   };
   var __vue_staticRenderFns__ = [];
 
-  var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) return;
@@ -310,7 +310,7 @@
   var __vue_is_functional_template__ = false;
   /* component normalizer */
   function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    var component = script$$1 || {};
+    var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     if (!component.render) {
       component.render = template.render;
@@ -360,7 +360,7 @@
       var group = isOldIE ? css.media || 'default' : id;
       var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
 
-      if (!style.ids.includes(id)) {
+      if (style.ids.indexOf(id) === -1) {
         var code = css.source;
         var index = style.ids.length;
 
@@ -410,7 +410,7 @@
   }
   /* style inject SSR */
 
-  var Modal = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
+  var Modal = __vue_normalize__({ render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, __vue_create_injector__, undefined);
 
   var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
