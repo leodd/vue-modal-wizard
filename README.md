@@ -7,8 +7,7 @@
 
 > Demo: https://leodd.github.io/vue-modal-wizard/
 
-![adaptive modal](https://user-images.githubusercontent.com/18587560/40267398-4de6006a-5b21-11e8-92fd-e06be781e07c.gif)
-![infinite modal](https://user-images.githubusercontent.com/18587560/40267391-27a39caa-5b21-11e8-9e43-d073c8b62c00.gif)
+![demo](https://user-images.githubusercontent.com/18587560/42184702-0f048a16-7e0c-11e8-8cdd-04f1d2db3e96.gif)
 
 ## Install
 
